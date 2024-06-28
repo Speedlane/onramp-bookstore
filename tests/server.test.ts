@@ -7,11 +7,11 @@ type Book = {
   author: string;
 };
 
-describe('Get /api/books', () => {
-  afterAll((done) => {
-    server.close(done);
-  });
+afterAll((done) => {
+  server.close(done);
+});
 
+describe('Get /api/books', () => {
   it('should return a list of books', async () => {
     const response = await request(app).get('/api/books');
     expect(response.status).toBe(200);
@@ -20,5 +20,19 @@ describe('Get /api/books', () => {
       expect(book).toHaveProperty('title');
       expect(book).toHaveProperty('author');
     });
+  });
+});
+
+describe('Delete /api/books/:id', () => {
+  it('should delete a book', async () => {
+    const response = await request(app).delete('/api/books/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ message: 'Book deleted' });
+  });
+
+  it('should return 404 if book not found', async () => {
+    const response = await request(app).delete('/api/books/1');
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({ message: 'Book not found' });
   });
 });
