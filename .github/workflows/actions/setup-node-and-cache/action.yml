@@ -1,0 +1,22 @@
+name: 'Setup Node and Cache Dependencies'
+
+description: 'Setup Node 20 and Cache Installed Dependencies'
+
+runs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Cache Node Modules
+      id: node-cache
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('yarn.lock') }}
+
+    - name: Install Node Dependencies
+      shell: bash
+      run: yarn install
