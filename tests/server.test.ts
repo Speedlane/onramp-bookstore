@@ -7,11 +7,11 @@ type Book = {
   author: string;
 };
 
-describe('Get /api/books', () => {
-  afterAll((done) => {
-    server.close(done);
-  });
+afterAll((done) => {
+  server.close(done);
+});
 
+describe('Get /api/books', () => {
   it('should return a list of books', async () => {
     const response = await request(app).get('/api/books');
     expect(response.status).toBe(200);
