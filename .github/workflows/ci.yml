@@ -1,0 +1,35 @@
+name: CI Bookstore
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+        shell: bash
+
+      - name: Run ESLint
+        run: npm lint
+        shell: bash
+
+      - name: Run Prettier
+        run: npm prettier:check
+        shell: bash
+
+      - name: Run tests
+        run: npm test
+        shell: bash
