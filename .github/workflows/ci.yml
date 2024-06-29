@@ -10,17 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js and Install Dependencies
+        uses: ./setup-node-and-install
         with:
           node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-        shell: bash
 
       - name: Run ESLint
         run: npm run lint
