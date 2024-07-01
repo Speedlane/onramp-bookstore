@@ -36,6 +36,11 @@ app.delete('/api/books/:id', (req, res) => {
   }
 });
 
+//test2
+app.get('/api/books2', (req, res) => {
+  res.json(books);
+});
+
 const server = app.listen(3030, () => {
   console.log('Server is listening on port 3030');
 });
