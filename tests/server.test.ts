@@ -21,4 +21,18 @@ describe('Get /api/books', () => {
       expect(book).toHaveProperty('author');
     });
   });
+
+  describe('Delete /api/books/:id', () => {
+    it('should delete a book', async () => {
+      const response = await request(app).delete('/api/books/1');
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({ message: 'Book deleted' });
+    });
+
+    it('should return 404 if the book is not found', async () => {
+      const response = await request(app).delete('/api/books/1');
+      expect(response.status).toBe(404);
+      expect(response.body).toEqual({ message: 'Book not found' });
+    });
+  });
 });

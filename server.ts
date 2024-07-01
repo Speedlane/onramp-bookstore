@@ -24,6 +24,17 @@ app.get('/api/books', (req, res) => {
   res.json(books);
 });
 
+app.delete('/api/books/:id', (req, res) => {
+  const { id } = req.params;
+  const index = books.findIndex((book) => book.id === Number(id));
+  if (index === -1) {
+    return res.status(404).json({ message: 'Book not found' });
+  } else {
+    books.splice(index, 1);
+    return res.json({ message: 'Book deleted' });
+  }
+});
+
 const server = app.listen(3030, () => {
   console.log('Server is listening on port 3030');
 });
