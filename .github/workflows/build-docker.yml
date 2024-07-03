@@ -1,0 +1,23 @@
+name: Build Docker Image
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node and Install Dependencies
+        uses: ./.github/workflows/actions/setup
+        with:
+          node-version: '20'
+
+      - name: Build Docker Image
+        run: |
+          docker build -t bookstore-api .
+          docker images bookstore-api
+        shell: bash
