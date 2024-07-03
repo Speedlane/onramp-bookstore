@@ -54,3 +54,7 @@ jobs:
       - name: Run Tests
         run: npm run test
         shell: bash
+
+  build-docker-image:
+    needs: test
+    uses: ./.github/workflows/build-docker.yml
